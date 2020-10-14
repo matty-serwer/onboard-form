@@ -25,7 +25,7 @@ function App() {
         setFormValues(initFormValues);
       })
       .catch((err) => {
-        debugger;
+        alert('Network Error.')
       });
   };
 
