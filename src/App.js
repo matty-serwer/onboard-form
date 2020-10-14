@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import * as yup from "yup";
@@ -22,8 +21,9 @@ function App() {
     axios
       .post("https://reqres.in/api/users", newUser)
       .then((result) => {
-        setUsers([result.data], ...users);
+        setUsers([result.data, ...users]);
         setFormValues(initFormValues);
+        console.log(users);
       })
       .catch((err) => {
         debugger;
@@ -52,7 +52,7 @@ function App() {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
-      tos: formValues.tos,
+      tos: formValues.tos
     };
     postNewUser(newUser);
   };
