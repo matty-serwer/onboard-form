@@ -48,13 +48,13 @@ const OnboardForm = (props) => {
         <label>
           I accept the Terms Of Service.
           <input
-            value='{values.tos}'
+            value={values.tos}
             onChange={onChange}
             name='tos'
             type='checkbox'
             checked={values.tos}
           />
-          <span class='checkmark'></span>
+          <span className='checkmark'></span>
         </label>
       </div>
       <button className='submit' disabled={disabled}>
