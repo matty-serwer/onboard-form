@@ -4,7 +4,8 @@ import "./App.css";
 import axios from "axios";
 import * as yup from "yup";
 import OnboardForm from "./components/OnboardForm";
-// import schema from './components/FormSchema';
+import User from "./components/User"
+import schema from './components/FormSchema';
 
 const initFormValues = { name: "", email: "", password: "", tos: false };
 const initFormErrors = { name: "", email: "", password: "", tos: "" };
@@ -30,6 +31,16 @@ function App() {
   };
 
   const inputChange = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({ ...formErrors, [name]: "" });
+      })
+      .catch((err) => {
+        setFormErrors({ ...formErrors, [name]: err.errors[0] });
+      });
+
     setFormValues({
       ...formValues,
       [name]: value,
@@ -41,16 +52,33 @@ function App() {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
-      tos: formValues.tos.trim()
-    }
+      tos: formValues.tos,
+    };
     postNewUser(newUser);
-  }
+  };
 
   // adjust disabled everytime formValues changes.
+  useEffect(() => {
+    schema.isValid(formValues)
+      .then(valid => {
+        setDisabled(!valid)
+      })
+  }, [formValues]);
 
   return (
     <div className='App'>
-      <OnboardForm />
+      <OnboardForm
+        values={formValues}
+        change={inputChange}
+        submit={formSubmit}
+        disabled={disabled}
+        errors={formErrors}
+      />
+      <div className='user-list'>
+        {users.map(user => {
+          return <User key={user.key} details={user} />
+        })}
+      </div>
     </div>
   );
 }

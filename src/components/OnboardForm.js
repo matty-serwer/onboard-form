@@ -1,18 +1,70 @@
-import React from 'react'
+import React from "react";
 
 const OnboardForm = (props) => {
-    // Name
-    // Email
-    // Password
-    // Terms of Service (checkbox)
-    // A Submit button to send our form data to the server.
-    return (
-        <form className='form container'>
-            <div className='form-group inputs'>
-                <input></input>
-            </div>
-        </form>
-    )
-}
+  const { values, change, submit, disabled, errors } = props;
 
-export default OnboardForm
+  const onChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const valueToUse = type === "checkbox" ? checked : value;
+    change(name, valueToUse);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    submit();
+  };
+
+  return (
+    <form className='form container' onSubmit={onSubmit}>
+      <div className='form-group inputs'>
+        <label>
+          Name
+          <input
+            value={values.name}
+            onChange={onChange}
+            name='name'
+            type='text'
+          />
+        </label>
+        <label>
+          Email
+          <input
+            value={values.email}
+            onChange={onChange}
+            name='email'
+            type='email'
+          />
+        </label>
+        <label>
+          Password
+          <input
+            value={values.password}
+            onChange={onChange}
+            name='password'
+            type='password'
+          />
+        </label>
+        <label>
+          Do You Accept The Terms Of Service?
+          <input
+            value={values.tos}
+            onChange={onChange}
+            name='tos'
+            type='checkbox'
+          />
+        </label>
+      </div>
+      <button className='submit' disabled={disabled}>
+        Submit
+      </button>
+      <div className='errors'>
+          <div>{errors.name}</div>
+          <div>{errors.email}</div>
+          <div>{errors.password}</div>
+          <div>{errors.tos}</div>
+      </div>
+    </form>
+  );
+};
+
+export default OnboardForm;
