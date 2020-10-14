@@ -23,7 +23,6 @@ function App() {
       .then((result) => {
         setUsers([result.data, ...users]);
         setFormValues(initFormValues);
-        console.log(users);
       })
       .catch((err) => {
         debugger;

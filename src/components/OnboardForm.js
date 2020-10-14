@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css"
 
 const OnboardForm = (props) => {
   const { values, change, submit, disabled, errors } = props;
@@ -45,13 +46,15 @@ const OnboardForm = (props) => {
           />
         </label>
         <label>
-          Do You Accept The Terms Of Service?
+          I accept the Terms Of Service.
           <input
-            value={values.tos}
+            value='{values.tos}'
             onChange={onChange}
             name='tos'
             type='checkbox'
+            checked={values.tos}
           />
+          <span class='checkmark'></span>
         </label>
       </div>
       <button className='submit' disabled={disabled}>
