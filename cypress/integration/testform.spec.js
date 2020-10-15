@@ -45,7 +45,7 @@ describe("Onboard Form App", () => {
 
     })
 
-    describe('successfully submitting a form', ()=> {
+    describe('submitting a form', ()=> {
         it('can enter info and submit form', ()=> {
             submitBtn().should('be.disabled')
             nameInput().type('Matthew Serwer')
@@ -62,6 +62,52 @@ describe("Onboard Form App", () => {
             submitBtn()
                 .should('be.disabled')
             cy.contains(/Matthew Serwer/).should('exist')
+        })
+
+        it('check for form validation if password is removed', ()=> {
+            submitBtn().should('be.disabled')
+            nameInput().type('Matthew Serwer')
+            emailInput().type('Matty@gmail.com')
+            passwordInput()
+                .type('Password123')
+                .clear()
+            tosCheckInput().click()
+            cy.contains(/You must enter a password/).should('exist')
+            submitBtn().should('be.disabled')
+        })
+
+        it('check for form validation if email is removed', ()=> {
+            submitBtn().should('be.disabled')
+            nameInput().type('Matthew Serwer')
+            emailInput()
+                .type('Matty@gmail.com')
+                .clear()
+            passwordInput().type('Password123')
+            tosCheckInput().click()
+            cy.contains(/You must enter an email address/).should('exist')
+            submitBtn().should('be.disabled')
+        })
+
+        it('check for form validation if name is removed', ()=> {
+            submitBtn().should('be.disabled')
+            nameInput()
+                .type('Matthew Serwer')
+                .clear()
+            emailInput().type('Matty@gmail.com')
+            passwordInput().type('Password123')
+            tosCheckInput().click()
+            cy.contains(/You must enter a name/).should('exist')
+            submitBtn().should('be.disabled')
+        })
+
+        it('check for form validation if tos is unchecked', ()=> {
+            submitBtn().should('be.disabled')
+            nameInput().type('Matthew Serwer')
+            emailInput().type('Matty@gmail.com')
+            passwordInput().type('Password123')
+            tosCheckInput().click().click()
+            cy.contains(/You must accept the terms of service/).should('exist')
+            submitBtn().should('be.disabled')
         })
     })
 })
