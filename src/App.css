@@ -40,47 +40,63 @@
   }
 }
 
+/* Form starts here */
 
-label {
-  display:flex;
+.container {
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
   align-items: center;
 }
 
-input {
-  width: 100%; /* Full width */
-  padding: 5px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 10px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  font-size: 1.5rem;
-
+.form-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-input[type=checkbox] {
+.form-label-checkbox {
+  /* requires container */
+  padding-right: 10.3rem;
+}
+
+.input-field {
+  width: 30rem;
+  padding: 0.3rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+.input-checkbox {
   transform: scale(2);
+  margin: 1rem;
+  
 }
 
 .submit {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 12px 20px;
   border: none;
   border-radius: 7px;
   cursor: pointer;
-  font-size:1.5rem;
+  font-size: 1.5rem;
+  margin: 1rem 0 0 4rem;
 }
 
 .submit:disabled {
   background-color: grey;
-  margin-top: 4%;
 }
 
 .errors {
-  color:red;
-  margin-top: 5%;
+  color: red;
+  margin: 5% 0 5%;
 }
 
+/* Form ends here */
 
-
+.user-list {
+  line-height: 0;
+}
