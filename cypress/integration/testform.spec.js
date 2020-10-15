@@ -1,13 +1,13 @@
 describe("Onboard Form App", () => {
     
-    
-    
+    beforeEach(() => {
+        cy.visit('http://localhost:3000/')
+    })
 
     const nameInput = () => cy.get('input[name=name]')
     const emailInput = () => cy.get('input[name=email]')
 
     describe('Checking inputs', () => {
-        cy.visit('http://localhost:3000/')
         it('can type in name input', () => {
             nameInput()
                 .should('exist')
